@@ -76,5 +76,5 @@ CREATE TABLE Shopping_Cart (
 );
 
 CREATE TABLE Manager (
-	
+	managerID nvarchar(50) NOT NULL PRIMARY KEY,
 );
