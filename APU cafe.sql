@@ -83,3 +83,4 @@ CREATE TABLE
 
 
 INSERT INTO Member VALUES ('M01','Harry','harry123','23h483ej','Male','Student','012-3345637'),
+('M02','Matthew','5_matt_5','dj37dj9d','Male','Student','017-8051823'),
