@@ -80,3 +80,5 @@ CREATE TABLE Manager (
 );
 
 CREATE TABLE
+
+create table
