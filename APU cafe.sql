@@ -80,3 +80,5 @@ CREATE TABLE Manager (
 );
 
 CREATE TABLE
+
+INSERT INTO Member VALUES ('M01','Harry','harry123','23h483ej','Male','Student','012-3345637'),
