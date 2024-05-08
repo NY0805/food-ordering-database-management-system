@@ -81,8 +81,5 @@ CREATE TABLE Manager (
 
 CREATE TABLE
 
-<<<<<<< HEAD
+
 INSERT INTO Member VALUES ('M01','Harry','harry123','23h483ej','Male','Student','012-3345637'),
-=======
-create table
->>>>>>> 2ea8082a49935eed3e28ae485c9f03341579a666
