@@ -154,7 +154,7 @@ CREATE TABLE Online_Banking_Receipt (
 	FOREIGN KEY (paymentID) REFERENCES Payment_Details(paymentID)
 );
 
-CREATE TBALE APfood_Wallet_Receipt (
+CREATE TABLE APfood_Wallet_Receipt (
 	apReceiptID nvarchar(50) NOT NULL PRIMARY KEY,
 	memberID nvarchar(50),
 	paymentID nvarchar(50),
@@ -172,4 +172,9 @@ INSERT INTO Member VALUES
 ('M07','Johnson','john23','P@ssw0rd','Male','Lecturer','012-4835769'),
 ('M08','David','dave89','Sm1thP@ss','Male','Lecturer','018-5937042'),
 ('M09','Sarah','sarahlee7','L33s@rah','Female','Student','012-3289463'),
-('M10','Turner','alex_turn','Turn3r!Pass','Male','Student','019-3785652')
+('M10','Turner','alex_turn','Turn3r!Pass','Male','Student','019-3785652');
+
+INSERT INTO Restaurant VALUES
+('RT01','Savor Junction','03-2341722','south','HC28439','A'),
+('RT02',Fizz and Sip Lounge','03-5930274','east','HC63826','A-'),
+('RT03','Sweet Bliss Delight','03-2374920','west','HC90631','A+');
