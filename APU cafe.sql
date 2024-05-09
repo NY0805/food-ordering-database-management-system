@@ -211,4 +211,9 @@ INSERT INTO Feedback VALUES
 ('E12','The food had a delightful medley of flavors and a pleasing texture that left a lasting impression.','5.0','M06','F09'),
 ('E13','Delicious fried rice,well-seasoned and perfectly cooked.','4.8','M07','F10'),
 ('E14','It is a perfect thirst-quencher on a warm summer day!','4.7','M08','F13');
+
+INSERT INTO Chef value
+('C01','Marcus','018-462 8293','RT01'),
+('C02','Nicholas','016-910 6290','RT02'),
+('C03','Ryan','012-038 5200','RT03');
 	
