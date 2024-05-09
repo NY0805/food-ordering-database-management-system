@@ -195,4 +195,20 @@ INSERT INTO Food menu VALUES
 ('F13','Classic Mojito','RM3.00','RT02'),
 ('F14','Strawberry Milkshake','RM3.00','RT02'),
 ('F15','Tiramisu','RM4.50','RT03');
+
+INSERT INTO Feedback VALUES
+('E01','The taste is niceeee.','4.5','M01','F05'),
+('E02','The meat is undercooked!!!!!','2.0','M01','F01'),
+('E03','I wont be ordering this again.','1.5','M02','F15'),
+('E04','Definitely a must-try for pizza lovers!','4.9','M02','F11'),
+('E05','It is too sweet for me.','3.5','M03','F02'),
+('E06','The Sushi Combo was an absolute delight!','4.5','M03','F12'),
+('E07','The dish lacked flavor and had an unappealing texture,making it a disappointing choice.','2.0','M03','F03'),
+('E08','I hate cheese.','1.7','M04','F03'),
+('E09','The Americano was bold and invigorating,with a satisfyingly rich flavor profile.','4.5','M04','F08'),
+('E10','Highly recommended!','5.0','M05','F04'),
+('E11','It looks so cute and of course yummy.','4.0','M05','F07'),
+('E12','The food had a delightful medley of flavors and a pleasing texture that left a lasting impression.','5.0','M06','F09'),
+('E13','Delicious fried rice,well-seasoned and perfectly cooked.','4.8','M07','F10'),
+('E14','It is a perfect thirst-quencher on a warm summer day!','4.7','M08','F13');
 	
