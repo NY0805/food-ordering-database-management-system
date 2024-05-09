@@ -176,5 +176,23 @@ INSERT INTO Member VALUES
 
 INSERT INTO Restaurant VALUES
 ('RT01','Savor Junction','03-2341722','south','HC28439','A'),
-('RT02',Fizz and Sip Lounge','03-5930274','east','HC63826','A-'),
+('RT02','Fizz and Sip Lounge','03-5930274','east','HC63826','A-'),
 ('RT03','Sweet Bliss Delight','03-2374920','west','HC90631','A+');
+
+INSERT INTO Food menu VALUES
+('F01','Cheeseburger','RM4.50','RT01'),
+('F02','Molten lava cake','RM7.20','RT03'),
+('F03','Spaghetti','RM8.50','RT01'),
+('F04','Veggle wrap','RM6.00','RT01'),
+('F05','Iced lemon tea','RM3.50','RT02'),
+('F06','Green tea latte','RM6.90','RT02'),
+('F07','Fruit tart','RM4.30','RT03'),
+('F08','Americano','RM6.90','RT02'),
+('F09','Brownies','RM6.50','RT03'),
+('F10','Fried rice','RM7.00','RT01'),
+('F11','Pepperoni Pizza','RM10.00','RT01'),
+('F12','Sushi Combo','RM8.00','RT01'),
+('F13','Classic Mojito','RM3.00','RT02'),
+('F14','Strawberry Milkshake','RM3.00','RT02'),
+('F15','Tiramisu','RM4.50','RT03'),
+	
