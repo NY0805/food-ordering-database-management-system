@@ -194,5 +194,5 @@ INSERT INTO Food menu VALUES
 ('F12','Sushi Combo','RM8.00','RT01'),
 ('F13','Classic Mojito','RM3.00','RT02'),
 ('F14','Strawberry Milkshake','RM3.00','RT02'),
-('F15','Tiramisu','RM4.50','RT03'),
+('F15','Tiramisu','RM4.50','RT03');
 	
