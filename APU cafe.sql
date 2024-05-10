@@ -276,4 +276,15 @@ INSERT INTO Manager VALUES
 ('MGR01','Cyrus','016-285 8219','OR-08','C02'),
 ('MGR01','Cyrus','016-285 8219','OR-09','C01')；
 
+INSERT INTO Payment_Details VALUES 
+('PD01', 'TNG', 'M01', 'success', '2023-01-05', '1:14:30 PM', '6%', 100, NULL, 'OR-01'),
+('PD02', 'Apfood wallet', 'M02', 'success', '2023-02-16', '4:50:11 PM', '6%', 100, NULL, 'OR-02'),
+('PD03', 'Online banking', 'M03', 'success', '2023-03-08', '10:53:57 AM', '6%', NULL, NULL, 'OR-03'),
+('PD04', 'Apfood wallet', 'M04', 'success', '2023-03-11', '5:30:39 PM', '6%', 200, NULL, 'OR-04'),
+('PD05', 'Online banking', 'M05', 'fail', '2023-03-30', '9:55:22 AM', '6%', 300, NULL, 'OR-05'),
+('PD06', 'Apfood wallet', 'M06', 'success', '2023-03-30', '10:00:08 AM', '6%', 100, NULL, 'OR-06'),
+('PD07', 'TNG', 'M07', 'success', '2023-05-29', '3:11:44 PM', '6%', NULL, NULL, 'OR-07'),
+('PD08', 'Apfood wallet', 'M08', 'success', '2023-06-02', '12:22:54 PM', '6%', 500, NULL, 'OR-08'),
+('PD09', 'TNG', 'M09', 'success', '2023-06-02', '12:38:42 PM', '6%', NULL, NULL, 'OR-09');
+
 	
