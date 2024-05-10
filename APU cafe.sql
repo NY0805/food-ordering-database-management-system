@@ -197,20 +197,20 @@ INSERT INTO Food_Menu VALUES
 ('F15','Tiramisu','RM4.50','RT03');
 
 INSERT INTO Feedback VALUES
-('E01','The taste is niceeee.','4.5','M01','F05'),
-('E02','The meat is undercooked!!!!!','2.0','M01','F01'),
-('E03','I wont be ordering this again.','1.5','M02','F15'),
-('E04','Definitely a must-try for pizza lovers!','4.9','M02','F11'),
-('E05','It is too sweet for me.','3.5','M03','F02'),
-('E06','The Sushi Combo was an absolute delight!','4.5','M03','F12'),
-('E07','The dish lacked flavor and had an unappealing texture,making it a disappointing choice.','2.0','M03','F03'),
-('E08','I hate cheese.','1.7','M04','F03'),
-('E09','The Americano was bold and invigorating,with a satisfyingly rich flavor profile.','4.5','M04','F08'),
-('E10','Highly recommended!','5.0','M05','F04'),
-('E11','It looks so cute and of course yummy.','4.0','M05','F07'),
-('E12','The food had a delightful medley of flavors and a pleasing texture that left a lasting impression.','5.0','M06','F09'),
-('E13','Delicious fried rice,well-seasoned and perfectly cooked.','4.8','M07','F10'),
-('E14','It is a perfect thirst-quencher on a warm summer day!','4.7','M08','F13');
+('E01','The taste is niceeee.',4.5,'M01','F05'),
+('E02','The meat is undercooked!!!!!',2.0,'M01','F01'),
+('E03','I wont be ordering this again.',1.5,'M02','F15'),
+('E04','Definitely a must-try for pizza lovers!',4.9,'M02','F11'),
+('E05','It is too sweet for me.',3.5,'M03','F02'),
+('E06','The Sushi Combo was an absolute delight!',4.5,'M03','F12'),
+('E07','The dish lacked flavor and had an unappealing texture,making it a disappointing choice.',2.0,'M03','F03'),
+('E08','I hate cheese.',1.7,'M04','F03'),
+('E09','The Americano was bold and invigorating,with a satisfyingly rich flavor profile.',4.5,'M04','F08'),
+('E10','Highly recommended!',5.0,'M05','F04'),
+('E11','It looks so cute and of course yummy.',4.0,'M05','F07'),
+('E12','The food had a delightful medley of flavors and a pleasing texture that left a lasting impression.',5.0,'M06','F09'),
+('E13','Delicious fried rice,well-seasoned and perfectly cooked.',4.8,'M07','F10'),
+('E14','It is a perfect thirst-quencher on a warm summer day!',4.7,'M08','F13');
 
 INSERT INTO Chef VALUES
 ('C01','Marcus','018-462 8293','RT01'),
@@ -223,25 +223,25 @@ INSERT INTO Worker VALUES
 ('W03','Jothan','014-9563850');
 
 INSERT INTO Orders VALUES
-('OR-01','2023-01-05','1:08:45PM','Out for delivery','1','M01','F05','C02','W01'),
-('OR-01','2023-01-05','1:08:45PM','In kitchen','2','M01','F01','C01','W02'),
-('OR-02','2023-02-16','4:28:52PM','Delivered','1','M02','F05','C02','W03'),
-('OR-02','2023-02-16','4:28:52PM','In kitchen','2','M02','F10','C01','W02'),
-('OR-02','2023-02-16','4:28:52PM','Unsuccessful','1','M02','F15','C03','W03'),
-('OR-03','2023-03-08','10:51:38AM','In kitchen','3','M03','F02','C03','W01'),
-('OR-03','2023-03-08','10:51:38AM','In kitchen','1','M03','F03','C01','W01'),
-('OR-03','2023-03-08','10:51:38AM','Out for delivery','1','M03','F12','C01','W03'),
-('OR-03','2023-03-08','10:51:38AM','Delivered','1','M03','F14','C02','W02'),
-('OR-03','2023-03-08','10:51:38AM','Unsuccessful','M03','F11','C01','W02'),
-('OR-04','2023-03-11','2:13:25PM','Delivered','2','M04','F03','C01','W01'),
-('OR-04','2023-03-11','2:13:25PM','Out for delivery','1','M04','F08','C02','W01'),
-('OR-06','2023-05-17','9:49:01AM','In kitchen','4','M05','F04','C01','W02'),
-('OR-06','2023-05-17','9:49:01AM','Unsuccessful','1','M05','F07','C03','W03'),
-('OR-06','2023-05-17','9:49:01AM','Out for delivery','1','M05','F15','C03','W03'),
-('OR-07','2023-05-29','3:07:43PM','Delivered','1','M06','F09','C03','W01'),
-('OR-08','2023-06-02','12:01:44PM','In kitchen','2','M07','F10','C01','W02'),
-('OR-09','2023-06-02','12:33:41PM','Out for delivery','1','M08','F13','C02','W03'),
-('OR-10','2023-06-13','11:27:31AM','Delivered','3','M09','F11','C01','W01');
+('OR-01','2023-01-05','1:08:45PM','Out for delivery',1,'M01','F05','C02','W01'),
+('OR-01','2023-01-05','1:08:45PM','In kitchen',2,'M01','F01','C01','W02'),
+('OR-02','2023-02-16','4:28:52PM','Delivered',1,'M02','F05','C02','W03'),
+('OR-02','2023-02-16','4:28:52PM','In kitchen',2,'M02','F10','C01','W02'),
+('OR-02','2023-02-16','4:28:52PM','Unsuccessful',1,'M02','F15','C03','W03'),
+('OR-03','2023-03-08','10:51:38AM','In kitchen',3,'M03','F02','C03','W01'),
+('OR-03','2023-03-08','10:51:38AM','In kitchen',1,'M03','F03','C01','W01'),
+('OR-03','2023-03-08','10:51:38AM','Out for delivery',1,'M03','F12','C01','W03'),
+('OR-03','2023-03-08','10:51:38AM','Delivered',1,'M03','F14','C02','W02'),
+('OR-03','2023-03-08','10:51:38AM','Unsuccessful',1,'M03','F11','C01','W02'),
+('OR-04','2023-03-11','2:13:25PM','Delivered',2,'M04','F03','C01','W01'),
+('OR-04','2023-03-11','2:13:25PM','Out for delivery',1,'M04','F08','C02','W01'),
+('OR-06','2023-05-17','9:49:01AM','In kitchen',4,'M05','F04','C01','W02'),
+('OR-06','2023-05-17','9:49:01AM','Unsuccessful',1,'M05','F07','C03','W03'),
+('OR-06','2023-05-17','9:49:01AM','Out for delivery',1,'M05','F15','C03','W03'),
+('OR-07','2023-05-29','3:07:43PM','Delivered',1,'M06','F09','C03','W01'),
+('OR-08','2023-06-02','12:01:44PM','In kitchen',2,'M07','F10','C01','W02'),
+('OR-09','2023-06-02','12:33:41PM','Out for delivery',1,'M08','F13','C02','W03'),
+('OR-10','2023-06-13','11:27:31AM','Delivered',3,'M09','F11','C01','W01');
 
 INSERT INTO Shopping_Cart VALUES
 ('S01','RM8.00','M01','OR-01'),
