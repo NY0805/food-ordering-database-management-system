@@ -253,7 +253,7 @@ INSERT INTO Shopping_Cart VALUES
 ('S07','RM7.00','M07','OR-07'),
 ('S08','RM3.00','M08','OR-08'),
 ('S09','RM10.00','M09','OR-09'),
-('S10','NULL','M10','NULL');
+('S10',NULL,'M10',NULL);
 
 INSERT INTO Manager VALUES
 ('MGR01','Cyrus','016-285 8219','OR-01','C02'),
@@ -286,5 +286,19 @@ INSERT INTO Payment_Details VALUES
 ('PD07', 'TNG', 'M07', 'success', '2023-05-29', '3:11:44 PM', '6%', NULL, NULL, 'OR-07'),
 ('PD08', 'Apfood wallet', 'M08', 'success', '2023-06-02', '12:22:54 PM', '6%', 500, NULL, 'OR-08'),
 ('PD09', 'TNG', 'M09', 'success', '2023-06-02', '12:38:42 PM', '6%', NULL, NULL, 'OR-09');
+
+INSERT INTO APfood_Wallet VALUES 
+('WA01', 'RM76.00', 'M01', NULL),
+('WA02', 'RM23.90', 'M02', 'PD02'),
+('WA03', 'RM18.30', 'M03', NULL),
+('WA04', 'RM50.00', 'M04', 'PD04'),
+('WA05', 'RM160.00', 'M05', 'PD06'),
+('WA06', 'RM35.50', 'M06', NULL),
+('WA07', 'RM78.00', 'M07', 'PD07'),
+('WA08', 'RM67.00', 'M08', NULL),
+('WA09', 'RM20.00', 'M09', NULL),
+('WA10', 'RM5.50', 'M10', 'PD11');
+
+
 
 	
