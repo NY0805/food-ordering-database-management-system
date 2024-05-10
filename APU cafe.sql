@@ -212,8 +212,13 @@ INSERT INTO Feedback VALUES
 ('E13','Delicious fried rice,well-seasoned and perfectly cooked.','4.8','M07','F10'),
 ('E14','It is a perfect thirst-quencher on a warm summer day!','4.7','M08','F13');
 
-INSERT INTO Chef value
+INSERT INTO Chef VALUES
 ('C01','Marcus','018-462 8293','RT01'),
 ('C02','Nicholas','016-910 6290','RT02'),
 ('C03','Ryan','012-038 5200','RT03');
+
+INSERT INTO Worker VALUES
+('W01','Jolin','012-3456789'),
+('W02','Olivia','011-4752956'),
+('W03','Jothan','014-9563850');
 	
