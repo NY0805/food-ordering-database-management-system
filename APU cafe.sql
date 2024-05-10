@@ -311,6 +311,18 @@ INSERT INTO Reward_Details VALUES
 ('R09', 90, '2025-06-13', 'WA09', 'M09'),
 ('R10', NULL, NULL, 'WA10', 'M10');
 
+INSERT INTO Purchase_History VALUES 
+('PH01', 'PD01', 'OR-01', 'M01'),
+('PH02', 'PD02', 'OR-02', 'M02'),
+('PH03', 'PD03', 'OR-03', 'M03'),
+('PH04', 'PD04', 'OR-04', 'M04'),
+('PH05', 'PD05', 'OR-05', 'M05'),
+('PH06', 'PD05', 'OR-05', 'M05'),
+('PH07', 'PD06', 'OR-06', 'M06'),
+('PH08', 'PD07', 'OR-07', 'M07'),
+('PH09', 'PD08', 'OR-08', 'M08'),
+('PH10', 'PD09', 'OR-09', 'M09');
+
 
 
 	
