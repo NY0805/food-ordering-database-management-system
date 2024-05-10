@@ -323,6 +323,34 @@ INSERT INTO Purchase_History VALUES
 ('PH09', 'PD08', 'OR-08', 'M08'),
 ('PH10', 'PD09', 'OR-09', 'M09');
 
+INSERT INTO Reload_History VALUES 
+('RH01', '2022-12-29', '10:09:04 AM', 'WA01'),
+('RH02', '2023-02-10', '3:55:47 PM', 'WA02'),
+('RH03', '2023-03-13', '8:39:17 AM', 'WA03'),
+('RH04', '2023-03-20', '11:25:18 AM', 'WA04'),
+('RH05', '2023-04-27', '12:36:04 PM', 'WA05'),
+('RH06', '2023-05-10', '9:43:31 AM', 'WA06'),
+('RH07', '2023-05-18', '5:04:37 PM', 'WA07'),
+('RH08', '2023-06-29', '4:23:19 PM', 'WA08'),
+('RH09', '2023-07-01', '1:09:18 PM', 'WA09'),
+('RH10', NULL, '12:42:21 PM', 'WA10');
+
+INSERT INTO TNG_Receipt VALUES 
+('TNG01', 'M01', 'PD01'),
+('TNG02', 'M06', 'PD07'),
+('TNG03', 'M08', 'PD09');
+
+INSERT INTO Online—_Banking_Receipt VALUES 
+('OB01', 'M03', 'HongLeong Bank', 'PD03'),
+('OB02', 'M05', 'CIMB Bank', 'PD05'),
+('OB03', 'M09', 'MayBank', 'PD10');
+
+INSERT INTO Apfood_Wallet_Receipt VALUES 
+('AW01', 'M02', 'PD02'),
+('AW02', 'M04', 'PD04'),
+('AW03', 'M05', 'PD06'),
+('AW04', 'M07', 'PD08');
+
 
 
 	
