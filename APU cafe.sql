@@ -179,7 +179,7 @@ INSERT INTO Restaurant VALUES
 ('RT02','Fizz and Sip Lounge','03-5930274','east','HC63826','A-'),
 ('RT03','Sweet Bliss Delight','03-2374920','west','HC90631','A+');
 
-INSERT INTO Food menu VALUES
+INSERT INTO Food_Menu VALUES
 ('F01','Cheeseburger','RM4.50','RT01'),
 ('F02','Molten lava cake','RM7.20','RT03'),
 ('F03','Spaghetti','RM8.50','RT01'),
@@ -242,4 +242,16 @@ INSERT INTO Orders VALUES
 ('OR-08','2023-06-02','12:01:44PM','In kitchen','2','M07','F10','C01','W02'),
 ('OR-09','2023-06-02','12:33:41PM','Out for delivery','1','M08','F13','C02','W03'),
 ('OR-10','2023-06-13','11:27:31AM','Delivered','3','M09','F11','C01','W01');
+
+INSERT INTO Shopping_Cart VALUES
+('S01','RM8.00','M01','OR-01'),
+('S02','RM15.00','M02','OR-02'),
+('S03','RM36.70','M03','OR-03'),
+('S04','RM15.40','M04','OR-04'),
+('S05','RM14.80','M05','OR-05'),
+('S06','RM6.50','M06','OR-06'),
+('S07','RM7.00','M07','OR-07'),
+('S08','RM3.00','M08','OR-08'),
+('S09','RM10.00','M09','OR-09'),
+('S10','NULL','M10','NULL');
 	
