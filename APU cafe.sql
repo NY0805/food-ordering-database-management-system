@@ -14,7 +14,7 @@ CREATE TABLE Member (
 CREATE TABLE Restaurant (
 	restaurantID nvarchar(50) NOT NULL PRIMARY KEY,
 	contactNumber nvarchar(50),
-	location nvarchar(50),
+	location_restaurant nvarchar(50),
 	halalLicense nvarchar(50),
 	cleanlinessLicense nvarchar(50),
 );
