@@ -13,23 +13,24 @@ CREATE TABLE Member (
 
 CREATE TABLE Restaurant (
 	restaurantID nvarchar(50) NOT NULL PRIMARY KEY,
+	rName nvarchar(50),
 	contactNumber nvarchar(50),
 	location_restaurant nvarchar(50),
 	halalLicense nvarchar(50),
-	cleanlinessLicense nvarchar(50),
+	cleanlinessLicense nvarchar(50)
 );
 
 CREATE TABLE Food_Menu (
 	foodID nvarchar(50) NOT NULL PRIMARY KEY,
 	fName nvarchar(50),
-	price decimal,
+	price_RM decimal,
 	restaurantID nvarchar(50),
 	FOREIGN KEY (restaurantID) REFERENCES Restaurant(restaurantID)
 );
 
 CREATE TABLE Feedback (
 	feedbackID nvarchar(50) NOT NULL PRIMARY KEY,
-	description nvarchar(50),
+	description nvarchar(200),
 	rating decimal,
 	memberID nvarchar(50),
 	foodID nvarchar(50),
@@ -60,19 +61,20 @@ CREATE TABLE Orders (
 	foodID nvarchar(50),
 	chefID nvarchar(50),
 	workerID nvarchar(50),
+	orderQuantity int,
 	FOREIGN KEY (memberID) REFERENCES Member(memberID),
 	FOREIGN KEY (foodID) REFERENCES Food_Menu(foodID),
 	FOREIGN KEY (chefID) REFERENCES Chef(chefID),
-	FOREIGN KEY (workerID) REFERENCES Worker(workerID),
+	FOREIGN KEY (workerID) REFERENCES Worker(workerID)
 );
 
 CREATE TABLE Shopping_Cart (
 	cartID nvarchar(50) NOT NULL PRIMARY KEY,
-	totalCost decimal,
+	totalCost_RM decimal,
 	memberID nvarchar(50),
-	restaurantID nvarchar(50),
+	orderID nvarchar(50),
 	FOREIGN KEY (memberID) REFERENCES Member(memberID),
-	FOREIGN KEY (restaurantID) REFERENCES Restaurant(restaurantID)
+	FOREIGN KEY (orderID) REFERENCES Orders(orderID)
 );
 
 CREATE TABLE Manager (
@@ -94,7 +96,7 @@ CREATE TABLE Payment_Details (
 	payTime time,
 	tax nvarchar(50),
 	pointDiscount int,
-	subtotal decimal,
+	subtotal_RM decimal,
 	orderID nvarchar(50),
 	FOREIGN KEY (memberID) REFERENCES Member(memberID),
 	FOREIGN KEY (orderID) REFERENCES Orders(orderID)
@@ -102,7 +104,7 @@ CREATE TABLE Payment_Details (
 
 CREATE TABLE APfood_Wallet (
 	walletID nvarchar(50) NOT NULL PRIMARY KEY,
-	balance decimal,
+	balance_RM decimal,
 	memberID nvarchar(50),
 	paymentID nvarchar(50),
 	FOREIGN KEY (memberID) REFERENCES Member(memberID),
@@ -180,21 +182,21 @@ INSERT INTO Restaurant VALUES
 ('RT03','Sweet Bliss Delight','03-2374920','west','HC90631','A+');
 
 INSERT INTO Food_Menu VALUES
-('F01','Cheeseburger','RM4.50','RT01'),
-('F02','Molten lava cake','RM7.20','RT03'),
-('F03','Spaghetti','RM8.50','RT01'),
-('F04','Veggle wrap','RM6.00','RT01'),
-('F05','Iced lemon tea','RM3.50','RT02'),
-('F06','Green tea latte','RM6.90','RT02'),
-('F07','Fruit tart','RM4.30','RT03'),
-('F08','Americano','RM6.90','RT02'),
-('F09','Brownies','RM6.50','RT03'),
-('F10','Fried rice','RM7.00','RT01'),
-('F11','Pepperoni Pizza','RM10.00','RT01'),
-('F12','Sushi Combo','RM8.00','RT01'),
-('F13','Classic Mojito','RM3.00','RT02'),
-('F14','Strawberry Milkshake','RM3.00','RT02'),
-('F15','Tiramisu','RM4.50','RT03');
+('F01','Cheeseburger',4.50,'RT01'),
+('F02','Molten lava cake',7.20,'RT03'),
+('F03','Spaghetti',8.50,'RT01'),
+('F04','Veggle wrap',6.00,'RT01'),
+('F05','Iced lemon tea',3.50,'RT02'),
+('F06','Green tea latte',6.90,'RT02'),
+('F07','Fruit tart',4.30,'RT03'),
+('F08','Americano',6.90,'RT02'),
+('F09','Brownies',6.50,'RT03'),
+('F10','Fried rice',7.00,'RT01'),
+('F11','Pepperoni Pizza',10.00,'RT01'),
+('F12','Sushi Combo',8.00,'RT01'),
+('F13','Classic Mojito',3.00,'RT02'),
+('F14','Strawberry Milkshake',3.00,'RT02'),
+('F15','Tiramisu',4.50,'RT03');
 
 INSERT INTO Feedback VALUES
 ('E01','The taste is niceeee.',4.5,'M01','F05'),
@@ -223,36 +225,36 @@ INSERT INTO Worker VALUES
 ('W03','Jothan','014-9563850');
 
 INSERT INTO Orders VALUES
-('OR-01','2023-01-05','1:08:45PM','Out for delivery',1,'M01','F05','C02','W01'),
-('OR-01','2023-01-05','1:08:45PM','In kitchen',2,'M01','F01','C01','W02'),
-('OR-02','2023-02-16','4:28:52PM','Delivered',1,'M02','F05','C02','W03'),
-('OR-02','2023-02-16','4:28:52PM','In kitchen',2,'M02','F10','C01','W02'),
-('OR-02','2023-02-16','4:28:52PM','Unsuccessful',1,'M02','F15','C03','W03'),
-('OR-03','2023-03-08','10:51:38AM','In kitchen',3,'M03','F02','C03','W01'),
-('OR-03','2023-03-08','10:51:38AM','In kitchen',1,'M03','F03','C01','W01'),
-('OR-03','2023-03-08','10:51:38AM','Out for delivery',1,'M03','F12','C01','W03'),
-('OR-03','2023-03-08','10:51:38AM','Delivered',1,'M03','F14','C02','W02'),
-('OR-03','2023-03-08','10:51:38AM','Unsuccessful',1,'M03','F11','C01','W02'),
-('OR-04','2023-03-11','2:13:25PM','Delivered',2,'M04','F03','C01','W01'),
-('OR-04','2023-03-11','2:13:25PM','Out for delivery',1,'M04','F08','C02','W01'),
-('OR-06','2023-05-17','9:49:01AM','In kitchen',4,'M05','F04','C01','W02'),
-('OR-06','2023-05-17','9:49:01AM','Unsuccessful',1,'M05','F07','C03','W03'),
-('OR-06','2023-05-17','9:49:01AM','Out for delivery',1,'M05','F15','C03','W03'),
-('OR-07','2023-05-29','3:07:43PM','Delivered',1,'M06','F09','C03','W01'),
-('OR-08','2023-06-02','12:01:44PM','In kitchen',2,'M07','F10','C01','W02'),
-('OR-09','2023-06-02','12:33:41PM','Out for delivery',1,'M08','F13','C02','W03'),
-('OR-10','2023-06-13','11:27:31AM','Delivered',3,'M09','F11','C01','W01');
+('OR-01','2023-01-05','13:08:45','Out for delivery','M01','F05','C02','W01',1),
+('OR-01','2023-01-05','13:08:45','In kitchen','M01','F01','C01','W02',2),
+('OR-02','2023-02-16','16:28:52','Delivered','M02','F05','C02','W03',1),
+('OR-02','2023-02-16','16:28:52','In kitchen','M02','F10','C01','W02',2),
+('OR-02','2023-02-16','16:28:52','Unsuccessful','M02','F15','C03','W03',1),
+('OR-03','2023-03-08','10:51:38','In kitchen','M03','F02','C03','W01',3),
+('OR-03','2023-03-08','10:51:38','In kitchen','M03','F03','C01','W01',1),
+('OR-03','2023-03-08','10:51:38','Out for delivery','M03','F12','C01','W03',1),
+('OR-03','2023-03-08','10:51:38','Delivered','M03','F14','C02','W02',1),
+('OR-03','2023-03-08','10:51:38','Unsuccessful','M03','F11','C01','W02',1),
+('OR-04','2023-03-11','14:13:25','Delivered','M04','F03','C01','W01',2),
+('OR-04','2023-03-11','14:13:25','Out for delivery','M04','F08','C02','W01',1),
+('OR-06','2023-05-17','9:49:01','In kitchen','M05','F04','C01','W02',4),
+('OR-06','2023-05-17','9:49:01','Unsuccessful','M05','F07','C03','W03',1),
+('OR-06','2023-05-17','9:49:01','Out for delivery','M05','F15','C03','W03',1),
+('OR-07','2023-05-29','15:07:43','Delivered','M06','F09','C03','W01',1),
+('OR-08','2023-06-02','12:01:44','In kitchen','M07','F10','C01','W02',2),
+('OR-09','2023-06-02','12:33:41','Out for delivery','M08','F13','C02','W03',1),
+('OR-10','2023-06-13','11:27:31','Delivered','M09','F11','C01','W01',3);
 
 INSERT INTO Shopping_Cart VALUES
-('S01','RM8.00','M01','OR-01'),
-('S02','RM15.00','M02','OR-02'),
-('S03','RM36.70','M03','OR-03'),
-('S04','RM15.40','M04','OR-04'),
-('S05','RM14.80','M05','OR-05'),
-('S06','RM6.50','M06','OR-06'),
-('S07','RM7.00','M07','OR-07'),
-('S08','RM3.00','M08','OR-08'),
-('S09','RM10.00','M09','OR-09'),
+('S01',8.00,'M01','OR-01'),
+('S02',15.00,'M02','OR-02'),
+('S03',36.70,'M03','OR-03'),
+('S04',15.40,'M04','OR-04'),
+('S05',14.80,'M05','OR-05'),
+('S06',6.50,'M06','OR-06'),
+('S07',7.00,'M07','OR-07'),
+('S08',3.00,'M08','OR-08'),
+('S09',10.00,'M09','OR-09'),
 ('S10',NULL,'M10',NULL);
 
 INSERT INTO Manager VALUES
@@ -274,30 +276,30 @@ INSERT INTO Manager VALUES
 ('MGR01','Cyrus','016-285 8219','OR-06','C03'),
 ('MGR01','Cyrus','016-285 8219','OR-07','C01'),
 ('MGR01','Cyrus','016-285 8219','OR-08','C02'),
-('MGR01','Cyrus','016-285 8219','OR-09','C01')；
+('MGR01','Cyrus','016-285 8219','OR-09','C01');
 
 INSERT INTO Payment_Details VALUES 
-('PD01', 'TNG', 'M01', 'success', '2023-01-05', '1:14:30 PM', '6%', 100, NULL, 'OR-01'),
-('PD02', 'Apfood wallet', 'M02', 'success', '2023-02-16', '4:50:11 PM', '6%', 100, NULL, 'OR-02'),
-('PD03', 'Online banking', 'M03', 'success', '2023-03-08', '10:53:57 AM', '6%', NULL, NULL, 'OR-03'),
-('PD04', 'Apfood wallet', 'M04', 'success', '2023-03-11', '5:30:39 PM', '6%', 200, NULL, 'OR-04'),
-('PD05', 'Online banking', 'M05', 'fail', '2023-03-30', '9:55:22 AM', '6%', 300, NULL, 'OR-05'),
-('PD06', 'Apfood wallet', 'M06', 'success', '2023-03-30', '10:00:08 AM', '6%', 100, NULL, 'OR-06'),
-('PD07', 'TNG', 'M07', 'success', '2023-05-29', '3:11:44 PM', '6%', NULL, NULL, 'OR-07'),
-('PD08', 'Apfood wallet', 'M08', 'success', '2023-06-02', '12:22:54 PM', '6%', 500, NULL, 'OR-08'),
-('PD09', 'TNG', 'M09', 'success', '2023-06-02', '12:38:42 PM', '6%', NULL, NULL, 'OR-09');
+('PD01', 'TNG', 'M01', 'success', '2023-01-05', '13:14:30', '6%', 100, NULL, 'OR-01'),
+('PD02', 'Apfood wallet', 'M02', 'success', '2023-02-16', '16:50:11', '6%', 100, NULL, 'OR-02'),
+('PD03', 'Online banking', 'M03', 'success', '2023-03-08', '10:53:57', '6%', NULL, NULL, 'OR-03'),
+('PD04', 'Apfood wallet', 'M04', 'success', '2023-03-11', '17:30:39', '6%', 200, NULL, 'OR-04'),
+('PD05', 'Online banking', 'M05', 'fail', '2023-03-30', '9:55:22', '6%', 300, NULL, 'OR-05'),
+('PD06', 'Apfood wallet', 'M06', 'success', '2023-03-30', '10:00:08', '6%', 100, NULL, 'OR-06'),
+('PD07', 'TNG', 'M07', 'success', '2023-05-29', '15:11:44', '6%', NULL, NULL, 'OR-07'),
+('PD08', 'Apfood wallet', 'M08', 'success', '2023-06-02', '12:22:54', '6%', 500, NULL, 'OR-08'),
+('PD09', 'TNG', 'M09', 'success', '2023-06-02', '12:38:42', '6%', NULL, NULL, 'OR-09');
 
 INSERT INTO APfood_Wallet VALUES 
-('WA01', 'RM76.00', 'M01', NULL),
-('WA02', 'RM23.90', 'M02', 'PD02'),
-('WA03', 'RM18.30', 'M03', NULL),
-('WA04', 'RM50.00', 'M04', 'PD04'),
-('WA05', 'RM160.00', 'M05', 'PD06'),
-('WA06', 'RM35.50', 'M06', NULL),
-('WA07', 'RM78.00', 'M07', 'PD07'),
-('WA08', 'RM67.00', 'M08', NULL),
-('WA09', 'RM20.00', 'M09', NULL),
-('WA10', 'RM5.50', 'M10', 'PD11');
+('WA01', 76.00, 'M01', NULL),
+('WA02', 23.90, 'M02', 'PD02'),
+('WA03', 18.30, 'M03', NULL),
+('WA04', 50.00, 'M04', 'PD04'),
+('WA05', 160.00, 'M05', 'PD06'),
+('WA06', 35.50, 'M06', NULL),
+('WA07', 78.00, 'M07', 'PD07'),
+('WA08', 67.00, 'M08', NULL),
+('WA09', 20.00, 'M09', NULL),
+('WA10', 5.50, 'M10', 'PD11');
 
 INSERT INTO Reward_Details VALUES 
 ('R01', 50, '2025-01-05', 'WA01', 'M01'),
@@ -324,23 +326,23 @@ INSERT INTO Purchase_History VALUES
 ('PH10', 'PD09', 'OR-09', 'M09');
 
 INSERT INTO Reload_History VALUES 
-('RH01', '2022-12-29', '10:09:04 AM', 'WA01'),
-('RH02', '2023-02-10', '3:55:47 PM', 'WA02'),
-('RH03', '2023-03-13', '8:39:17 AM', 'WA03'),
-('RH04', '2023-03-20', '11:25:18 AM', 'WA04'),
-('RH05', '2023-04-27', '12:36:04 PM', 'WA05'),
-('RH06', '2023-05-10', '9:43:31 AM', 'WA06'),
-('RH07', '2023-05-18', '5:04:37 PM', 'WA07'),
-('RH08', '2023-06-29', '4:23:19 PM', 'WA08'),
-('RH09', '2023-07-01', '1:09:18 PM', 'WA09'),
-('RH10', NULL, '12:42:21 PM', 'WA10');
+('RH01', '2022-12-29', '10:09:04', 'WA01'),
+('RH02', '2023-02-10', '15:55:47', 'WA02'),
+('RH03', '2023-03-13', '8:39:17', 'WA03'),
+('RH04', '2023-03-20', '11:25:18', 'WA04'),
+('RH05', '2023-04-27', '12:36:04', 'WA05'),
+('RH06', '2023-05-10', '9:43:31', 'WA06'),
+('RH07', '2023-05-18', '17:04:37', 'WA07'),
+('RH08', '2023-06-29', '16:23:19', 'WA08'),
+('RH09', '2023-07-01', '13:09:18', 'WA09'),
+('RH10', NULL, '12:42:21', 'WA10');
 
 INSERT INTO TNG_Receipt VALUES 
 ('TNG01', 'M01', 'PD01'),
 ('TNG02', 'M06', 'PD07'),
 ('TNG03', 'M08', 'PD09');
 
-INSERT INTO Online—_Banking_Receipt VALUES 
+INSERT INTO Online_Banking_Receipt VALUES 
 ('OB01', 'M03', 'HongLeong Bank', 'PD03'),
 ('OB02', 'M05', 'CIMB Bank', 'PD05'),
 ('OB03', 'M09', 'MayBank', 'PD10');
@@ -350,7 +352,6 @@ INSERT INTO Apfood_Wallet_Receipt VALUES
 ('AW02', 'M04', 'PD04'),
 ('AW03', 'M05', 'PD06'),
 ('AW04', 'M07', 'PD08');
-
 
 
 	
