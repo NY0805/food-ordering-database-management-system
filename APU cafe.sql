@@ -279,27 +279,28 @@ INSERT INTO Manager VALUES
 ('MGR01','Cyrus','016-285 8219','OR-09','C01');
 
 INSERT INTO Payment_Details VALUES 
-('PD01', 'TNG', 'M01', 'success', '2023-01-05', '13:14:30', '6%', 100, NULL, 'OR-01'),
-('PD02', 'Apfood wallet', 'M02', 'success', '2023-02-16', '16:50:11', '6%', 100, NULL, 'OR-02'),
-('PD03', 'Online banking', 'M03', 'success', '2023-03-08', '10:53:57', '6%', NULL, NULL, 'OR-03'),
-('PD04', 'Apfood wallet', 'M04', 'success', '2023-03-11', '17:30:39', '6%', 200, NULL, 'OR-04'),
-('PD05', 'Online banking', 'M05', 'fail', '2023-03-30', '9:55:22', '6%', 300, NULL, 'OR-05'),
-('PD06', 'Apfood wallet', 'M06', 'success', '2023-03-30', '10:00:08', '6%', 100, NULL, 'OR-06'),
-('PD07', 'TNG', 'M07', 'success', '2023-05-29', '15:11:44', '6%', NULL, NULL, 'OR-07'),
-('PD08', 'Apfood wallet', 'M08', 'success', '2023-06-02', '12:22:54', '6%', 500, NULL, 'OR-08'),
-('PD09', 'TNG', 'M09', 'success', '2023-06-02', '12:38:42', '6%', NULL, NULL, 'OR-09');
+('PD01', 'TNG', 'M01', 'success', '2023-01-05', '13:14:30', '6%', 100, 'OR-01'),
+('PD02', 'Apfood wallet', 'M02', 'success', '2023-02-16', '16:50:11', '6%', 100, 'OR-02'),
+('PD03', 'Online banking', 'M03', 'success', '2023-03-08', '10:53:57', '6%', NULL, 'OR-03'),
+('PD04', 'Apfood wallet', 'M04', 'success', '2023-03-11', '17:30:39', '6%', 200, 'OR-04'),
+('PD05', 'Online banking', 'M05', 'success', '2023-05-17', '09:58:03', '6%', NULL, 'OR-05'),
+('PD06', 'Apfood wallet', 'M06', 'success', '2023-05-29', '15:11:44', '6%', 100, 'OR-06'),
+('PD07', 'TNG', 'M07', 'success', '2023-06-02', '12:22:54', '6%', NULL, 'OR-07'),
+('PD08', 'Apfood wallet', 'M08', 'success', '2023-06-02', '12:38:42', '6%', 500, 'OR-08'),
+('PD09', 'TNG', 'M09', 'success', '2023-06-13', '11:40:48', '6%', NULL, 'OR-09');
+
 
 INSERT INTO APfood_Wallet VALUES 
 ('WA01', 76.00, 'M01', NULL),
 ('WA02', 23.90, 'M02', 'PD02'),
 ('WA03', 18.30, 'M03', NULL),
 ('WA04', 50.00, 'M04', 'PD04'),
-('WA05', 160.00, 'M05', 'PD06'),
-('WA06', 35.50, 'M06', NULL),
-('WA07', 78.00, 'M07', 'PD07'),
-('WA08', 67.00, 'M08', NULL),
+('WA05', 160.00, 'M05', NULL),
+('WA06', 35.50, 'M06', PD06),
+('WA07', 78.00, 'M07', NULL),
+('WA08', 67.00, 'M08', 'PD08'),
 ('WA09', 20.00, 'M09', NULL),
-('WA10', 5.50, 'M10', 'PD11');
+('WA10', 5.50, 'M10', NULL);
 
 INSERT INTO Reward_Details VALUES 
 ('R01', 50, '2025-01-05', 'WA01', 'M01'),
@@ -319,11 +320,10 @@ INSERT INTO Purchase_History VALUES
 ('PH03', 'PD03', 'OR-03', 'M03'),
 ('PH04', 'PD04', 'OR-04', 'M04'),
 ('PH05', 'PD05', 'OR-05', 'M05'),
-('PH06', 'PD05', 'OR-05', 'M05'),
-('PH07', 'PD06', 'OR-06', 'M06'),
-('PH08', 'PD07', 'OR-07', 'M07'),
-('PH09', 'PD08', 'OR-08', 'M08'),
-('PH10', 'PD09', 'OR-09', 'M09');
+('PH06', 'PD06', 'OR-06', 'M06'),
+('PH07', 'PD07', 'OR-07', 'M07'),
+('PH08', 'PD08', 'OR-08', 'M08'),
+('PH09', 'PD09', 'OR-09', 'M09');
 
 INSERT INTO Reload_History VALUES 
 ('RH01', '2022-12-29', '10:09:04', 'WA01'),
@@ -335,23 +335,22 @@ INSERT INTO Reload_History VALUES
 ('RH07', '2023-05-18', '17:04:37', 'WA07'),
 ('RH08', '2023-06-29', '16:23:19', 'WA08'),
 ('RH09', '2023-07-01', '13:09:18', 'WA09'),
-('RH10', NULL, '12:42:21', 'WA10');
+('RH10', '2023-07-13', '12:42:21', 'WA10');
 
 INSERT INTO TNG_Receipt VALUES 
 ('TNG01', 'M01', 'PD01'),
-('TNG02', 'M06', 'PD07'),
-('TNG03', 'M08', 'PD09');
+('TNG02', 'M07', 'PD07'),
+('TNG03', 'M09', 'PD09');
 
 INSERT INTO Online_Banking_Receipt VALUES 
 ('OB01', 'M03', 'HongLeong Bank', 'PD03'),
-('OB02', 'M05', 'CIMB Bank', 'PD05'),
-('OB03', 'M09', 'MayBank', 'PD10');
+('OB02', 'M05', 'CIMB Bank', 'PD05');
 
 INSERT INTO Apfood_Wallet_Receipt VALUES 
 ('AW01', 'M02', 'PD02'),
 ('AW02', 'M04', 'PD04'),
-('AW03', 'M05', 'PD06'),
-('AW04', 'M07', 'PD08');
+('AW03', 'M06', 'PD06'),
+('AW04', 'M08', 'PD08');
 
 
 	
