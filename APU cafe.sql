@@ -31,7 +31,7 @@ CREATE TABLE Food_Menu (
 CREATE TABLE Feedback (
 	feedbackID nvarchar(50) NOT NULL PRIMARY KEY,
 	description nvarchar(200),
-	rating decimal,
+	rating decimal(2,1),
 	memberID nvarchar(50),
 	foodID nvarchar(50),
 	FOREIGN KEY (memberID) REFERENCES Member(memberID),
@@ -346,3 +346,10 @@ INSERT INTO Apfood_Wallet_Receipt VALUES
 ('AW02', 'M04', 'PD04'),
 ('AW03', 'M06', 'PD06'),
 ('AW04', 'M08', 'PD08');
+
+--i
+SELECT Food_Menu.FoodID, Food_Menu.fName, Feedback.rating
+FROM Food_Menu
+FULL OUTER JOIN Feedback
+ON Food_Menu.FoodID = Feedback.FoodID
+WHERE rating = (SELECT MAX(rating) FROM Feedback);
