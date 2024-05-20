@@ -347,9 +347,18 @@ INSERT INTO Apfood_Wallet_Receipt VALUES
 ('AW03', 'M06', 'PD06'),
 ('AW04', 'M08', 'PD08');
 
---i
+--i. List the food(s) which has the highest rating. Show food id, food name and the rating.
 SELECT Food_Menu.FoodID, Food_Menu.fName, Feedback.rating
 FROM Food_Menu
 FULL OUTER JOIN Feedback
 ON Food_Menu.FoodID = Feedback.FoodID
 WHERE rating = (SELECT MAX(rating) FROM Feedback);
+
+
+--vi. List all the food where its average rating is more than the average rating of all food.
+
+SELECT Food_Menu.FoodID, Food_Menu.fname, Feedback.rating
+FROM Food_Menu
+FULL OUTER JOIN Feedback
+ON Food_Menu.FoodID = Feedback.FoodID
+WHERE rating > (SELECT AVG(rating) FROM Feedback);
