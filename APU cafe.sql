@@ -367,6 +367,13 @@ LEFT JOIN Orders ON Member.memberID = Orders.memberID
 GROUP BY Member.memberID, Member.mName
 HAVING COUNT(Orders.orderID) = 0;
 
+---v.Find the total number of food(meal) cooked by each chef. Show chef id, chef name, and number of meals cooked.
+SELECT Chef.chefID, Chef.cName AS cName, COUNT(Order_Details.orderID) AS total_meals
+FROM Chef
+JOIN Order_Details ON Chef.chefID = Order_Details.chefID
+GROUP BY Chef.chefID, Chef.cName;
+
+
 --vi. List all the food where its average rating is more than the average rating of all food.
 
 SELECT Food_Menu.FoodID, Food_Menu.fname, Feedback.rating
