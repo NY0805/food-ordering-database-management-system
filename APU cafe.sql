@@ -367,6 +367,26 @@ LEFT JOIN Orders ON Member.memberID = Orders.memberID
 GROUP BY Member.memberID, Member.mName
 HAVING COUNT(Orders.orderID) = 0;
 
+---iv. Find the total number of food(meal) ordered by manager from each chef.
+SELECT 
+    Manager.managerID,
+    Manager.mName AS Manager_Name,
+    Chef.chefID,
+    Chef.cName AS Chef_Name,
+    COUNT(Order_Details.foodID) AS Total_Meals_Ordered
+FROM 
+    Orders
+JOIN 
+    Order_Details ON Orders.orderID = Order_Details.orderID
+JOIN 
+    Chef ON Order_Details.chefID = Chef.chefID
+JOIN 
+    Manager ON Chef.managerID = Manager.managerID
+GROUP BY 
+    Manager.managerID, Manager.mName, Chef.chefID, Chef.cName
+ORDER BY 
+    Manager.managerID, Chef.chefID;
+
 ---v.Find the total number of food(meal) cooked by each chef. Show chef id, chef name, and number of meals cooked.
 SELECT Chef.chefID, Chef.cName AS cName, COUNT(Order_Details.orderID) AS total_meals
 FROM Chef
