@@ -6,7 +6,7 @@ CREATE TABLE Member (
 	mName nvarchar(50),
 	mUsername nvarchar(50),
 	mPassword nvarchar(50),
-	mGender nvarchar(50),
+	mGender nvarchar(10),
 	mRole nvarchar(50),
 	mContactNumber nvarchar(50)
 );
@@ -23,7 +23,7 @@ CREATE TABLE Restaurant (
 CREATE TABLE Food_Menu (
 	foodID nvarchar(50) NOT NULL PRIMARY KEY,
 	fName nvarchar(50),
-	fPrice_RM decimal,
+	fPrice_RM decimal(10,2),
 	restaurantID nvarchar(50),
 	FOREIGN KEY (restaurantID) REFERENCES Restaurant(restaurantID)
 );
@@ -70,7 +70,7 @@ CREATE TABLE Orders (
 
 CREATE TABLE Shopping_Cart (
 	cartID nvarchar(50) NOT NULL PRIMARY KEY,
-	totalCost_RM decimal,
+	totalCost_RM decimal(10,2),
 	memberID nvarchar(50),
 	orderID nvarchar(50),
 	FOREIGN KEY (memberID) REFERENCES Member(memberID),
@@ -99,7 +99,7 @@ CREATE TABLE Payment_Details (
 	payTime time,
 	tax nvarchar(50),
 	pointDiscount int,
-	subtotal_RM decimal,
+	subtotal_RM decimal(10,2),
 	orderID nvarchar(50),
 	FOREIGN KEY (memberID) REFERENCES Member(memberID),
 	FOREIGN KEY (orderID) REFERENCES Orders(orderID)
@@ -107,7 +107,7 @@ CREATE TABLE Payment_Details (
 
 CREATE TABLE APfood_Wallet (
 	walletID nvarchar(50) NOT NULL PRIMARY KEY,
-	balance_RM decimal,
+	balance_RM decimal(10,2),
 	memberID nvarchar(50),
 	paymentID nvarchar(50),
 	FOREIGN KEY (memberID) REFERENCES Member(memberID),
@@ -218,12 +218,12 @@ INSERT INTO Feedback VALUES
 ('E14','It is a perfect thirst-quencher on a warm summer day!',4.7,'M08','F13');
 
 INSERT INTO Manager VALUES
-('MGR01','Cyrus','016-285 8219');
+('MGR01','Cyrus','016-2858219');
 
 INSERT INTO Chef VALUES
-('C01','Marcus','018-462 8293','RT01','MGR01'),
-('C02','Nicholas','016-910 6290','RT02','MGR01'),
-('C03','Ryan','012-038 5200','RT03','MGR01');
+('C01','Marcus','018-4628293','RT01','MGR01'),
+('C02','Nicholas','016-9106290','RT02','MGR01'),
+('C03','Ryan','012-0385200','RT03','MGR01');
 
 INSERT INTO Worker VALUES
 ('W01','Jolin','012-3456789'),
@@ -330,7 +330,7 @@ INSERT INTO Reload_History VALUES
 ('RH07', '2023-05-18', '17:04:37', 'WA07'),
 ('RH08', '2023-06-29', '16:23:19', 'WA08'),
 ('RH09', '2023-07-01', '13:09:18', 'WA09'),
-('RH10', NULL, '12:42:21', 'WA10');
+('RH10', NULL, NULL, 'WA10');
 
 INSERT INTO TNG_Receipt VALUES 
 ('TNG01', 'M01', 'PD01'),
@@ -354,7 +354,6 @@ FULL OUTER JOIN Feedback
 ON Food_Menu.FoodID = Feedback.FoodID
 WHERE rating = (SELECT MAX(rating) FROM Feedback);
 
-
 --vi. List all the food where its average rating is more than the average rating of all food.
 
 SELECT Food_Menu.FoodID, Food_Menu.fname, Feedback.rating
@@ -362,3 +361,13 @@ FROM Food_Menu
 FULL OUTER JOIN Feedback
 ON Food_Menu.FoodID = Feedback.FoodID
 WHERE rating > (SELECT AVG(rating) FROM Feedback);
+
+--ix. Show the total members based on gender who are registered as members. List should include id, name, role(student/staff) and gender. 
+SELECT memberID, mName, mRole, mGender FROM Member
+ORDER BY mGender, memberID;
+
+--x. Show a list of ordered food which has not been delivered to members. The list should show member id, role(student/staff), contact number, food id, food name, quantity, date, and status of delivery. 
+SELECT Member.memberID, Member.mRole, Member.mContactNumber FROM Member INNER JOIN Orders ON Member.memberID = Orders.memberID
+INNER JOIN Order_Details.orderQuantity, Order_Details.deliveryStatus FROM Order_Details ON Order_Details.foodID = Food_Menu.foodID
+INNER JOIN Food_Menu.foodID, Food_Menu.fName ON Food_Menu.foodID = Order_Details.foodID
+WHERE Order_Details.deliveryStatus != Delivered;
