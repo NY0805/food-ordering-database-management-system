@@ -354,6 +354,15 @@ FULL OUTER JOIN Feedback
 ON Food_Menu.FoodID = Feedback.FoodID
 WHERE rating = (SELECT MAX(rating) FROM Feedback);
 
+--ii.Find the total number of feedback per member. Show member id, member name and total number of feedbacks per member.
+SELECT Member.memberID, Member.mName AS mName, COUNT(Feedback.feedbackID) AS total_feedbacks
+FROM Member
+JOIN Feedback ON Member.memberID = Feedback.memberID
+GROUP BY Member.memberID, Member.mName;
+
+--iii. Find members who have not made any orders. Show member id, member name and the total order.
+
+
 --vi. List all the food where its average rating is more than the average rating of all food.
 
 SELECT Food_Menu.FoodID, Food_Menu.fname, Feedback.rating
