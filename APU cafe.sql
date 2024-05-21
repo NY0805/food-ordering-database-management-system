@@ -361,7 +361,11 @@ JOIN Feedback ON Member.memberID = Feedback.memberID
 GROUP BY Member.memberID, Member.mName;
 
 --iii. Find members who have not made any orders. Show member id, member name and the total order.
-
+SELECT Member.memberID, Member.mName, COUNT(Orders.orderID) AS total_orders
+FROM Member
+LEFT JOIN Orders ON Member.memberID = Orders.memberID
+GROUP BY Member.memberID, Member.mName
+HAVING COUNT(Orders.orderID) = 0;
 
 --vi. List all the food where its average rating is more than the average rating of all food.
 
