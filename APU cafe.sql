@@ -355,7 +355,7 @@ ON Food_Menu.FoodID = Feedback.FoodID
 WHERE rating = (SELECT MAX(rating) FROM Feedback);
 
 --ii.Find the total number of feedback per member. Show member id, member name and total number of feedbacks per member.
-SELECT Member.memberID, Member.mName AS mName, COUNT(Feedback.feedbackID) AS total_feedbacks
+SELECT Member.memberID, Member.mName AS mName, COUNT(Feedback.feedbackID) AS total_feedback
 FROM Member
 JOIN Feedback ON Member.memberID = Feedback.memberID
 GROUP BY Member.memberID, Member.mName;
@@ -367,7 +367,7 @@ LEFT JOIN Orders ON Member.memberID = Orders.memberID
 GROUP BY Member.memberID, Member.mName
 HAVING COUNT(Orders.orderID) = 0;
 
----iv. Find the total number of food(meal) ordered by manager from each chef.
+--iv. Find the total number of food(meal) ordered by manager from each chef.
 SELECT 
     Manager.managerID,
     Manager.mName AS Manager_Name,
@@ -387,15 +387,13 @@ GROUP BY
 ORDER BY 
     Manager.managerID, Chef.chefID;
 
----v.Find the total number of food(meal) cooked by each chef. Show chef id, chef name, and number of meals cooked.
+--v.Find the total number of food(meal) cooked by each chef. Show chef id, chef name, and number of meals cooked.
 SELECT Chef.chefID, Chef.cName AS cName, COUNT(Order_Details.orderID) AS total_meals
 FROM Chef
 JOIN Order_Details ON Chef.chefID = Order_Details.chefID
 GROUP BY Chef.chefID, Chef.cName;
 
-
 --vi. List all the food where its average rating is more than the average rating of all food.
-
 SELECT Food_Menu.FoodID, Food_Menu.fname, Feedback.rating
 FROM Food_Menu
 FULL OUTER JOIN Feedback
@@ -403,11 +401,13 @@ ON Food_Menu.FoodID = Feedback.FoodID
 WHERE rating > (SELECT AVG(rating) FROM Feedback);
 
 --ix. Show the total members based on gender who are registered as members. List should include id, name, role(student/staff) and gender. 
-SELECT memberID, mName, mRole, mGender FROM Member
-ORDER BY mGender, memberID;
+SELECT COUNT(memberID) as Total_Gender, mGender FROM Member 
+GROUP BY mGender;
 
 --x. Show a list of ordered food which has not been delivered to members. The list should show member id, role(student/staff), contact number, food id, food name, quantity, date, and status of delivery. 
-SELECT Member.memberID, Member.mRole, Member.mContactNumber FROM Member INNER JOIN Orders ON Member.memberID = Orders.memberID
-INNER JOIN Order_Details.orderQuantity, Order_Details.deliveryStatus FROM Order_Details ON Order_Details.foodID = Food_Menu.foodID
-INNER JOIN Food_Menu.foodID, Food_Menu.fName ON Food_Menu.foodID = Order_Details.foodID
-WHERE Order_Details.deliveryStatus != Delivered;
+SELECT M.memberID, M.mRole, M.mContactNumber, F.foodID, F.fName, O.orderID, O.orderQuantity, O.deliveryStatus FROM Member M 
+INNER JOIN Orders ON Orders.memberID = M.memberID 
+INNER JOIN Order_Details O ON O.orderID = Orders.orderID
+INNER JOIN Food_Menu F ON F.foodID = O.FoodID
+WHERE deliveryStatus IN (SELECT deliveryStatus FROM Order_Details WHERE deliveryStatus != 'Delivered' );
+
