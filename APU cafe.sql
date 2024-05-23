@@ -411,3 +411,10 @@ INNER JOIN Order_Details O ON O.orderID = Orders.orderID
 INNER JOIN Food_Menu F ON F.foodID = O.FoodID
 WHERE deliveryStatus IN (SELECT deliveryStatus FROM Order_Details WHERE deliveryStatus != 'Delivered' );
 
+--xi. Show a list of members who made more than 2 orders. The list should show their
+member id, name, and role(student/staff) and total orders.
+SELECT memberID, mName, mRole, orderQuantity
+WHERE orderQuantity > 2;
+
+--xii. Find the monthly sales totals for the past year. The list should show order year, order
+month and total cost for that month.
