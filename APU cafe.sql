@@ -413,9 +413,12 @@ WHERE deliveryStatus IN (SELECT deliveryStatus FROM Order_Details WHERE delivery
 
 --xi. Show a list of members who made more than 2 orders. The list should show their
 member id, name, and role(student/staff) and total orders.
-SELECT memberID, mName, mRole, orderQuantity
-INNER JOIN Orders ON Orders.memberID = Member.memberID
-WHERE orderQuantity > 2;
+SELECT Member.memberID, Member.mName, Member.mRole, COUNT(Orders.orderID) AS total_orders
+FROM Member
+INNER JOIN Orders ON Member.memberID = Orders.memberID
+JOIN Order_Details ON Orders.orderID = Order_Details.orderID
+GROUP BY Member.memberID, Member.mName, Member.mRole
+HAVING COUNT(Orders.orderID) > 2;
 
 --xii. Find the monthly sales totals for the past year. The list should show order year, order
 month and total cost for that month.
