@@ -420,10 +420,9 @@ JOIN Order_Details ON Orders.orderID = Order_Details.orderID
 GROUP BY Member.memberID, Member.mName, Member.mRole
 HAVING SUM(Order_Details.orderQuantity) > 2;
 
---xii. Find the monthly sales totals for the past year. The list should show order year, order
-month and total cost for that month.
+--xii. Find the monthly sales totals for the past year. The list should show order year, order month and total cost for that month.
 SELECT YEAR(Orders.orderDate) AS order_year, MONTH(Orders.orderDate) AS order_month, SUM(Shopping_Cart.totalCost_RM) AS total_monthly_sales
 FROM Shopping_Cart
 INNER JOIN Orders ON Shopping_Cart.orderID = Orders.orderID
 GROUP BY YEAR(Orders.orderDate), MONTH(Orders.orderDate)
-ORDER BY YEAR(Orders.orderDate), MONTH(Orders.orderDate)
+ORDER BY YEAR(Orders.orderDate), MONTH(Orders.orderDate);
