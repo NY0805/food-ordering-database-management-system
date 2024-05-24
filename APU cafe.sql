@@ -383,11 +383,13 @@ JOIN Order_Details ON Chef.chefID = Order_Details.chefID
 GROUP BY Chef.chefID, Chef.cName;
 
 --vi. List all the food where its average rating is more than the average rating of all food.
-SELECT Food_Menu.FoodID, Food_Menu.fname, Feedback.rating
+SELECT Food_Menu.FoodID, Food_Menu.fname, CAST(AVG(Feedback.rating) AS DECIMAL(10,2)) AS AverageRating
 FROM Food_Menu
 FULL OUTER JOIN Feedback
 ON Food_Menu.FoodID = Feedback.FoodID
-WHERE rating > (SELECT AVG(rating) FROM Feedback);
+GROUP BY Food_Menu.FoodID, Food_Menu.fname
+HAVING AVG(Feedback.rating) > (SELECT AVG(rating) FROM Feedback)
+ORDER BY AverageRating DESC;
 
 --vii. Find the top 3 bestselling food(s). The list should include id, name, price and quantity sold.
 SELECT Food_Menu.FoodID, Food_Menu.fname, Food_Menu.fprice_RM, Order_Details.orderQuantity
