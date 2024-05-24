@@ -406,13 +406,15 @@ WHERE Order_Details.orderQuantity IN(
 	ORDER BY orderquantity DESC;
 
 --viii. Show the top 3 members who spent most on ordering food. List should include id and name and whether they student or staff.
-SELECT Member.memberid, Member.mName, Member.mRole, SUM(Payment_Details.subtotal_RM)
+SELECT Member.memberID, Member.mName, Member.mRole
 FROM Member
 FULL OUTER JOIN Payment_Details
 ON Member.memberID = Payment_Details.memberID
-WHERE Payment_Details.subtotal_RM IN (SELECT TOP 3 SUM(Payment_Details.subtotal_RM) FROM Payment_Details)
-GROUP BY Member.memberid, Member.mName, Member.mRole
-ORDER BY SUM(Payment_Details.subtotal_RM) DESC;
+WHERE Member.memberID IN (
+	SELECT TOP 3 memberID 
+	FROM Payment_Details
+	GROUP BY memberID
+	ORDER BY SUM(subtotal_RM)DESC);
 
 --ix. Show the total members based on gender who are registered as members. List should include id, name, role(student/staff) and gender. 
 SELECT COUNT(memberID) as Total_Gender, mGender FROM Member 
