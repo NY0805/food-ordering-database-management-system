@@ -389,6 +389,29 @@ FULL OUTER JOIN Feedback
 ON Food_Menu.FoodID = Feedback.FoodID
 WHERE rating > (SELECT AVG(rating) FROM Feedback);
 
+--vii. Find the top 3 bestselling food(s). The list should include id, name, price and quantity sold.
+SELECT Food_Menu.FoodID, Food_Menu.fname, Food_Menu.fprice_RM, Order_Details.orderQuantity
+FROM Food_Menu
+FULL OUTER JOIN Order_Details
+ON Food_Menu.FoodID = Order_Details.FoodID
+WHERE Order_Details.orderQuantity IN(
+	SELECT orderQuantity
+	FROM(
+		SELECT orderQuantity, DENSE_RANK() OVER (ORDER BY orderquantity DESC) AS orderQuantityrank
+		FROM Order_Details
+	) AS subquery
+	WHERE orderQuantityrank <= 3)
+	ORDER BY orderquantity DESC;
+
+--viii. Show the top 3 members who spent most on ordering food. List should include id and name and whether they student or staff.
+SELECT Member.memberid, Member.mName, Member.mRole, SUM(Payment_Details.subtotal_RM)
+FROM Member
+FULL OUTER JOIN Payment_Details
+ON Member.memberID = Payment_Details.memberID
+WHERE Payment_Details.subtotal_RM IN (SELECT TOP 3 SUM(Payment_Details.subtotal_RM) FROM Payment_Details)
+GROUP BY Member.memberid, Member.mName, Member.mRole
+ORDER BY SUM(Payment_Details.subtotal_RM) DESC;
+
 --ix. Show the total members based on gender who are registered as members. List should include id, name, role(student/staff) and gender. 
 SELECT COUNT(memberID) as Total_Gender, mGender FROM Member 
 GROUP BY mGender;
