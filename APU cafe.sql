@@ -40,8 +40,8 @@ CREATE TABLE Feedback (
 
 CREATE TABLE Manager (
 	managerID nvarchar(50) NOT NULL PRIMARY KEY,
-	mName nvarchar(50),
-	mContactNumber nvarchar(50)
+	mgrName nvarchar(50),
+	mgrContactNumber nvarchar(50)
 );
 
 CREATE TABLE Chef (
