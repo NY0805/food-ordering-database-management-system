@@ -348,26 +348,35 @@ INSERT INTO Apfood_Wallet_Receipt VALUES
 ('AW04', 'M08', 'PD08');
 
 --i. List the food(s) which has the highest rating. Show food id, food name and the rating.
+
 SELECT Food_Menu.FoodID, Food_Menu.fName, Feedback.rating
 FROM Food_Menu
-FULL OUTER JOIN Feedback
+INNER JOIN Feedback
 ON Food_Menu.FoodID = Feedback.FoodID
 WHERE rating = (SELECT MAX(rating) FROM Feedback);
 
+
 --ii.Find the total number of feedback per member. Show member id, member name and total number of feedbacks per member.
-SELECT Member.memberID, Member.mName AS mName, COUNT(Feedback.feedbackID) AS total_feedback
+
+SELECT Member.memberID, Member.mName, COUNT(Feedback.feedbackID) AS total_feedback
 FROM Member
-JOIN Feedback ON Member.memberID = Feedback.memberID
+FULL OUTER JOIN Feedback 
+ON Member.memberID = Feedback.memberID
 GROUP BY Member.memberID, Member.mName;
 
+
 --iii. Find members who have not made any orders. Show member id, member name and the total order.
+
 SELECT Member.memberID, Member.mName, COUNT(Orders.orderID) AS total_orders
 FROM Member
-LEFT JOIN Orders ON Member.memberID = Orders.memberID
+LEFT JOIN Orders 
+ON Member.memberID = Orders.memberID
 GROUP BY Member.memberID, Member.mName
 HAVING COUNT(Orders.orderID) = 0;
 
+
 --iv. Find the total number of food(meal) ordered by manager from each chef.
+
 SELECT Manager.managerID, Manager.mName AS Manager_Name, Chef.chefID, Chef.cName AS Chef_Name, COUNT(Order_Details.foodID) AS Total_Meals_Ordered
 FROM Orders
 JOIN Order_Details ON Orders.orderID = Order_Details.orderID
@@ -376,25 +385,31 @@ JOIN Manager ON Chef.managerID = Manager.managerID
 GROUP BY Manager.managerID, Manager.mName, Chef.chefID, Chef.cName
 ORDER BY Manager.managerID, Chef.chefID;
 
+
 --v.Find the total number of food(meal) cooked by each chef. Show chef id, chef name, and number of meals cooked.
+
 SELECT Chef.chefID, Chef.cName AS cName, COUNT(Order_Details.orderID) AS total_meals
 FROM Chef
 JOIN Order_Details ON Chef.chefID = Order_Details.chefID
 GROUP BY Chef.chefID, Chef.cName;
 
+
 --vi. List all the food where its average rating is more than the average rating of all food.
+
 SELECT Food_Menu.FoodID, Food_Menu.fname, CAST(AVG(Feedback.rating) AS DECIMAL(10,2)) AS AverageRating
 FROM Food_Menu
-FULL OUTER JOIN Feedback
+INNER JOIN Feedback
 ON Food_Menu.FoodID = Feedback.FoodID
 GROUP BY Food_Menu.FoodID, Food_Menu.fname
 HAVING AVG(Feedback.rating) > (SELECT AVG(rating) FROM Feedback)
 ORDER BY AverageRating DESC;
 
+
 --vii. Find the top 3 bestselling food(s). The list should include id, name, price and quantity sold.
+
 SELECT Food_Menu.FoodID, Food_Menu.fname, Food_Menu.fprice_RM, Order_Details.orderQuantity
 FROM Food_Menu
-FULL OUTER JOIN Order_Details
+INNER JOIN Order_Details
 ON Food_Menu.FoodID = Order_Details.FoodID
 WHERE Order_Details.orderQuantity IN(
 	SELECT orderQuantity
@@ -405,29 +420,39 @@ WHERE Order_Details.orderQuantity IN(
 	WHERE orderQuantityrank <= 3)
 	ORDER BY orderquantity DESC;
 
+
 --viii. Show the top 3 members who spent most on ordering food. List should include id and name and whether they student or staff.
+
 SELECT Member.memberID, Member.mName, Member.mRole
 FROM Member
-FULL OUTER JOIN Payment_Details
+INNER JOIN Payment_Details
 ON Member.memberID = Payment_Details.memberID
 WHERE Member.memberID IN (
 	SELECT TOP 3 memberID 
 	FROM Payment_Details
 	GROUP BY memberID
-	ORDER BY SUM(subtotal_RM)DESC);
+	ORDER BY SUM(subtotal_RM)DESC)
+GROUP BY Member.memberID, Member.mName, Member.mRole
+ORDER BY SUM(subtotal_RM)DESC;
+
 
 --ix. Show the total members based on gender who are registered as members. List should include id, name, role(student/staff) and gender. 
+
 SELECT COUNT(memberID) as Total_Gender, mGender FROM Member 
 GROUP BY mGender;
 
+
 --x. Show a list of ordered food which has not been delivered to members. The list should show member id, role(student/staff), contact number, food id, food name, quantity, date, and status of delivery. 
+
 SELECT M.memberID, M.mRole, M.mContactNumber, F.foodID, F.fName, O.orderID, O.orderQuantity, O.deliveryStatus FROM Member M 
 INNER JOIN Orders ON Orders.memberID = M.memberID 
 INNER JOIN Order_Details O ON O.orderID = Orders.orderID
 INNER JOIN Food_Menu F ON F.foodID = O.FoodID
 WHERE deliveryStatus IN (SELECT deliveryStatus FROM Order_Details WHERE deliveryStatus != 'Delivered');
 
+
 --xi. Show a list of members who made more than 2 orders. The list should show their member id, name, and role(student/staff) and total orders.
+
 SELECT Member.memberID, Member.mName, Member.mRole, SUM(Order_Details.orderQuantity) AS total_orders
 FROM Member
 INNER JOIN Orders ON Member.memberID = Orders.memberID
@@ -435,7 +460,9 @@ JOIN Order_Details ON Orders.orderID = Order_Details.orderID
 GROUP BY Member.memberID, Member.mName, Member.mRole
 HAVING SUM(Order_Details.orderQuantity) > 2;
 
+
 --xii. Find the monthly sales totals for the past year. The list should show order year, order month and total cost for that month.
+
 SELECT YEAR(Orders.orderDate) AS order_year, MONTH(Orders.orderDate) AS order_month, SUM(Shopping_Cart.totalCost_RM) AS total_monthly_sales_RM
 FROM Shopping_Cart
 INNER JOIN Orders ON Shopping_Cart.orderID = Orders.orderID
