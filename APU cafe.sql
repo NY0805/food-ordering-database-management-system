@@ -368,24 +368,13 @@ GROUP BY Member.memberID, Member.mName
 HAVING COUNT(Orders.orderID) = 0;
 
 --iv. Find the total number of food(meal) ordered by manager from each chef.
-SELECT 
-    Manager.managerID,
-    Manager.mName AS Manager_Name,
-    Chef.chefID,
-    Chef.cName AS Chef_Name,
-    COUNT(Order_Details.foodID) AS Total_Meals_Ordered
-FROM 
-    Orders
-JOIN 
-    Order_Details ON Orders.orderID = Order_Details.orderID
-JOIN 
-    Chef ON Order_Details.chefID = Chef.chefID
-JOIN 
-    Manager ON Chef.managerID = Manager.managerID
-GROUP BY 
-    Manager.managerID, Manager.mName, Chef.chefID, Chef.cName
-ORDER BY 
-    Manager.managerID, Chef.chefID;
+SELECT Manager.managerID, Manager.mName AS Manager_Name, Chef.chefID, Chef.cName AS Chef_Name, COUNT(Order_Details.foodID) AS Total_Meals_Ordered
+FROM Orders
+JOIN Order_Details ON Orders.orderID = Order_Details.orderID
+JOIN Chef ON Order_Details.chefID = Chef.chefID
+JOIN Manager ON Chef.managerID = Manager.managerID
+GROUP BY Manager.managerID, Manager.mName, Chef.chefID, Chef.cName
+ORDER BY Manager.managerID, Chef.chefID;
 
 --v.Find the total number of food(meal) cooked by each chef. Show chef id, chef name, and number of meals cooked.
 SELECT Chef.chefID, Chef.cName AS cName, COUNT(Order_Details.orderID) AS total_meals
@@ -409,10 +398,9 @@ SELECT M.memberID, M.mRole, M.mContactNumber, F.foodID, F.fName, O.orderID, O.or
 INNER JOIN Orders ON Orders.memberID = M.memberID 
 INNER JOIN Order_Details O ON O.orderID = Orders.orderID
 INNER JOIN Food_Menu F ON F.foodID = O.FoodID
-WHERE deliveryStatus IN (SELECT deliveryStatus FROM Order_Details WHERE deliveryStatus != 'Delivered' );
+WHERE deliveryStatus IN (SELECT deliveryStatus FROM Order_Details WHERE deliveryStatus != 'Delivered');
 
---xi. Show a list of members who made more than 2 orders. The list should show their
-member id, name, and role(student/staff) and total orders.
+--xi. Show a list of members who made more than 2 orders. The list should show their member id, name, and role(student/staff) and total orders.
 SELECT Member.memberID, Member.mName, Member.mRole, SUM(Order_Details.orderQuantity) AS total_orders
 FROM Member
 INNER JOIN Orders ON Member.memberID = Orders.memberID
@@ -421,7 +409,7 @@ GROUP BY Member.memberID, Member.mName, Member.mRole
 HAVING SUM(Order_Details.orderQuantity) > 2;
 
 --xii. Find the monthly sales totals for the past year. The list should show order year, order month and total cost for that month.
-SELECT YEAR(Orders.orderDate) AS order_year, MONTH(Orders.orderDate) AS order_month, SUM(Shopping_Cart.totalCost_RM) AS total_monthly_sales
+SELECT YEAR(Orders.orderDate) AS order_year, MONTH(Orders.orderDate) AS order_month, SUM(Shopping_Cart.totalCost_RM) AS total_monthly_sales_RM
 FROM Shopping_Cart
 INNER JOIN Orders ON Shopping_Cart.orderID = Orders.orderID
 GROUP BY YEAR(Orders.orderDate), MONTH(Orders.orderDate)
