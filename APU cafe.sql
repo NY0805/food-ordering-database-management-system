@@ -377,12 +377,11 @@ HAVING COUNT(Orders.orderID) = 0;
 
 --iv. Find the total number of food(meal) ordered by manager from each chef.
 
-SELECT Manager.managerID, Manager.mName AS Manager_Name, Chef.chefID, Chef.cName AS Chef_Name, COUNT(Order_Details.foodID) AS Total_Meals_Ordered
-FROM Orders
-JOIN Order_Details ON Orders.orderID = Order_Details.orderID
-JOIN Chef ON Order_Details.chefID = Chef.chefID
-JOIN Manager ON Chef.managerID = Manager.managerID
-GROUP BY Manager.managerID, Manager.mName, Chef.chefID, Chef.cName
+SELECT Manager.managerID, Manager.mgrName AS Manager_Name, Chef.chefID, Chef.cName AS Chef_Name, COUNT(Order_Details.foodID) AS Total_Meals_Ordered
+FROM Order_Details
+RIGHT JOIN Chef ON Order_Details.chefID = Chef.chefID
+INNER JOIN Manager ON Chef.managerID = Manager.managerID
+GROUP BY Manager.managerID, Manager.mgrName, Chef.chefID, Chef.cName
 ORDER BY Manager.managerID, Chef.chefID;
 
 
@@ -390,7 +389,7 @@ ORDER BY Manager.managerID, Chef.chefID;
 
 SELECT Chef.chefID, Chef.cName AS cName, COUNT(Order_Details.orderID) AS total_meals
 FROM Chef
-JOIN Order_Details ON Chef.chefID = Order_Details.chefID
+LEFT JOIN Order_Details ON Chef.chefID = Order_Details.chefID
 GROUP BY Chef.chefID, Chef.cName;
 
 
