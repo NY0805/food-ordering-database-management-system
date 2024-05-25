@@ -360,7 +360,7 @@ WHERE rating = (SELECT MAX(rating) FROM Feedback);
 
 SELECT Member.memberID, Member.mName, COUNT(Feedback.feedbackID) AS total_feedback
 FROM Member
-FULL OUTER JOIN Feedback 
+LEFT JOIN Feedback 
 ON Member.memberID = Feedback.memberID
 GROUP BY Member.memberID, Member.mName;
 
