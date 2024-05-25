@@ -443,7 +443,8 @@ GROUP BY mGender;
 
 --x. Show a list of ordered food which has not been delivered to members. The list should show member id, role(student/staff), contact number, food id, food name, quantity, date, and status of delivery. 
 
-SELECT M.memberID, M.mRole, M.mContactNumber, F.foodID, F.fName, O.orderID, O.orderQuantity, O.deliveryStatus FROM Member M 
+SELECT M.memberID, M.mRole, M.mContactNumber, F.foodID, F.fName, O.orderID, O.orderQuantity, O.deliveryStatus 
+FROM Member M 
 INNER JOIN Orders ON Orders.memberID = M.memberID 
 INNER JOIN Order_Details O ON O.orderID = Orders.orderID
 INNER JOIN Food_Menu F ON F.foodID = O.FoodID
@@ -452,18 +453,17 @@ WHERE deliveryStatus IN (SELECT deliveryStatus FROM Order_Details WHERE delivery
 
 --xi. Show a list of members who made more than 2 orders. The list should show their member id, name, and role(student/staff) and total orders.
 
-SELECT Member.memberID, Member.mName, Member.mRole, SUM(Order_Details.orderQuantity) AS total_orders
+SELECT Member.memberID, Member.mName, Member.mRole, COUNT(Orders.orderID) AS total_orders
 FROM Member
 INNER JOIN Orders ON Member.memberID = Orders.memberID
-JOIN Order_Details ON Orders.orderID = Order_Details.orderID
 GROUP BY Member.memberID, Member.mName, Member.mRole
-HAVING SUM(Order_Details.orderQuantity) > 2;
-
+HAVING COUNT(Orders.orderID) > 2;
 
 --xii. Find the monthly sales totals for the past year. The list should show order year, order month and total cost for that month.
 
-SELECT YEAR(Orders.orderDate) AS order_year, MONTH(Orders.orderDate) AS order_month, SUM(Shopping_Cart.totalCost_RM) AS total_monthly_sales_RM
-FROM Shopping_Cart
-INNER JOIN Orders ON Shopping_Cart.orderID = Orders.orderID
-GROUP BY YEAR(Orders.orderDate), MONTH(Orders.orderDate)
-ORDER BY YEAR(Orders.orderDate), MONTH(Orders.orderDate);
+SELECT YEAR(Payment_Details.payDate) AS order_year, 
+FORMAT(Payment_Details.payDate, 'MMMM') AS order_month, 
+SUM(Payment_Details.subtotal_RM) AS total_monthly_sales_RM
+FROM Payment_Details
+GROUP BY YEAR(Payment_Details.payDate), MONTH(Payment_Details.payDate), FORMAT(Payment_Details.payDate, 'MMMM')
+ORDER BY YEAR(Payment_Details.payDate), MONTH(Payment_Details.payDate);
